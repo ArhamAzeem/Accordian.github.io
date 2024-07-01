@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Task 17 - FAQ Accordian</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .container {
+            display: flex;
+            background-color: #f8f4f4;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 1vh 1vh black;
+        }
+
+        @media only screen and (max-width: 425px) {
+        .container {
+            width: 350px;
+        }
+        }
+
+        @media only screen and (max-width: 375px) {
+        .container {
+            width: 290px;
+        }
+        }
+
+        @media only screen and (max-width: 320px) {
+        .container {
+            width: 250px;
+        }
+        }
+
+        h2 {
+            text-align: center;
+            color: rgb(255, 255, 76);
+            text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.582);
+        }
+
+        #faqs{
+            width: 100%;
+        }
+        
+        .question {
+            background-color: #f8f4f4;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            padding-right: 10%;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            border-radius: 1rem;
+            border: 2px solid rgb(255, 255, 76);
+        }
+
+        .question.active {
+            white-space: normal;
+            overflow: visible;
+            border-radius: 1rem 1rem 0 0;
+            border-bottom: none;
+            text-overflow: unset;
+        }
+
+        .question::after {
+            content: "+";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+        }
+
+        .question.active::after {
+            content: "-";
+        }
+
+        .answer {
+            padding: 10px;
+            background-color: #f8f4f4;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            border: 2px solid rgb(255, 255, 76);
+        }
+
+        .answer.active {
+            border-top: none;
+            max-height: 1000px;
+            opacity: 1;
+            border-radius: 0 0 1rem 1rem;
+            margin-bottom: 1.5vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Task 17 - FAQ Accordian</h2>
+        <div id="faqs"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const faqs = [
+                {
+                    "question": "Q: Why should I bother making my own FAQ accordion when I can just find one online?",
+                    "answer": "A: Ah, the eternal question! But fear not, for in the vast expanse of cyberspace lies a treasure trove of pre-made accordions waiting to be plundered. Yet, should you dare to embark on this quest for customization, know that you tread the path less traveled—a path fraught with peril, excitement, and perhaps, a glimmer of satisfaction."
+                },
+                {
+                    "question": "Q: Can't I just use a pre-made accordion plugin instead?",
+                    "answer": "A: Of course, my dear friend, you could opt for the effortless allure of pre-made plugins, where the only struggle lies in choosing between the myriad options. But where's the thrill in that? Dare to defy convention, to challenge the status quo, and forge your own destiny amidst the chaos of code!"
+                },
+                {
+                    "question": "Q: Why do I need smooth animations for the accordion?",
+                    "answer": "A: Well, clearly it's to impress all those website visitors who have nothing better to do than marvel at the graceful elegance of your accordion animations. Because who doesn't want to be the talk of the town in the riveting world of web design?"
+                },
+                {
+                    "question": "Q: Is it important to make sure my accordion works on all devices and browsers?",
+                    "answer": "A: Absolutely! Because you never know when someone might whip out their ancient Nokia phone and decide to check out your cutting-edge accordion. Can't afford to let those Nokia enthusiasts down, can we?"
+                },
+                {
+                    "question": "Q: Will users find it confusing to open and close accordion sections?",
+                    "answer": "A: Oh, most definitely! Because what's life without a little confusion, right? Let's keep users on their toes, guessing whether clicking that accordion header will reveal enlightenment or plunge them into the abyss of existential dread."
+                },
+                {
+                    "question": "Q: What if I run into problems while making my accordion?",
+                    "answer": "A: Oh, the horror! Because nothing screams 'fun' like spending hours wrestling with JavaScript bugs and CSS quirks, all while questioning your life choices. But hey, at least you'll emerge from the coding trenches a battle-hardened warrior, right?"
+                },
+                {
+                    "question": "Q: Do I really need to write down all the steps I take to make my accordion?",
+                    "answer": "A: Well, if you enjoy the exquisite pleasure of reliving your descent into accordion madness or wish to bestow upon future generations the wisdom gleaned from your harrowing journey, then by all means, document away! After all, who needs sanity when you can have documentation?"
+                }
+            ];
+
+            const faqContainer = document.getElementById('faqs');
+            faqs.forEach(function(faq) {
+                faqContainer.innerHTML += `
+                    <div class="faq">
+                        <div class="question">${faq.question}</div>
+                        <div class="answer">${faq.answer}</div>
+                    </div>
+                `;;
+            });
+
+            const questions = document.querySelectorAll(".question");
+            questions.forEach(function(question) {
+                question.addEventListener("click", function() {
+                    const answer = this.nextElementSibling;
+                    const shown = answer.classList.contains("active");
+
+                    document.querySelectorAll(".answer.active").forEach(function(otheranswers) {
+                        otheranswers.classList.remove("active");
+                        otheranswers.style.maxHeight = "0";
+                    });
+
+                    if (!shown) {
+                        answer.classList.add("active");
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        this.classList.add("active");
+                    } else {
+                        answer.classList.remove("active");
+                        answer.style.maxHeight = "0";
+                        this.classList.remove("active");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
